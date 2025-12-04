@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Data
+data/raw/
+data/processed/
+*.csv
+*.xlsx
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Model files
+*.pth
+*.pt
+*.onnx
+*.pb
+models/checkpoints/
+runs/
+
+# Weights & Biases
+wandb/
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Leader-only files (local)
+PROJECT_GUIDE.md
+LEADER_CHECKLIST.md
+LEADERSHIP_ADVICE.md
+CLAUDE.md
+SESSION_STATUS.md
+FILE_ORGANIZATION.md
