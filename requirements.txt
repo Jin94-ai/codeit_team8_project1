@@ -1,36 +1,109 @@
-# Deep Learning Framework
-torch>=2.0.0
-torchvision>=0.15.0
-torchaudio>=2.0.0
+# ==========================================
+# 코드잇 8팀 초급 프로젝트 - Requirements
+# ==========================================
+#
+# 이 파일은 예시입니다. 팀 미팅에서 결정한 기술 스택에 맞게 수정하세요.
+# 불필요한 패키지는 삭제하고, 필요한 패키지는 추가하세요.
+#
+# 설치 방법:
+# pip install -r requirements.txt
+#
+# 버전 명시 없음 = 최신 버전 설치
+#
+# ==========================================
 
-# Object Detection
-ultralytics>=8.0.0
+# ===== 필수 패키지 =====
+# Python 버전: 3.8+
 
-# Data Processing
-numpy>=1.24.0
-pandas>=2.0.0
-opencv-python>=4.8.0
-pillow>=10.0.0
+# 기본 데이터 처리
+numpy
+pandas
+pillow
 
-# Data Augmentation
-albumentations>=1.3.0
+# 시각화
+matplotlib
 
-# Visualization
-matplotlib>=3.7.0
-seaborn>=0.12.0
+# Jupyter Notebook
+jupyter
+notebook
+ipywidgets
 
-# Experiment Tracking
-wandb>=0.15.0
+# 유틸리티
+tqdm
 
-# Jupyter
-jupyter>=1.0.0
-notebook>=7.0.0
-ipywidgets>=8.0.0
 
-# Utilities
-tqdm>=4.65.0
-pyyaml>=6.0
-python-dotenv>=1.0.0
+# ===== Deep Learning Framework (선택) =====
+# 팀 미팅에서 결정 후 주석 해제
 
-# Model Evaluation
-scikit-learn>=1.3.0
+# Option 1: PyTorch (추천)
+torch
+torchvision
+# torchaudio  # 필요시 추가
+
+# Option 2: TensorFlow
+# tensorflow
+# tensorflow-datasets
+
+
+# ===== Object Detection 라이브러리 (선택) =====
+# 팀 미팅에서 결정 후 주석 해제
+
+# Option 1: Ultralytics (YOLOv8) - 추천
+# ultralytics
+
+# Option 2: Detectron2 (Faster R-CNN 등)
+# detectron2 @ git+https://github.com/facebookresearch/detectron2.git
+
+# Option 3: MMDetection
+# mmcv-full
+# mmdet
+
+# Option 4: TensorFlow Object Detection API
+# tensorflow-object-detection-api
+
+
+# ===== 이미지 처리 =====
+opencv-python
+
+# 데이터 증강 (선택)
+# Option 1: Albumentations - 추천
+# albumentations
+
+# Option 2: imgaug
+# imgaug
+
+# Option 3: torchvision transforms (PyTorch 내장)
+
+
+# ===== 실험 추적 도구 (선택) =====
+# 팀 미팅에서 결정 후 주석 해제
+
+# Option 1: Weights & Biases
+# wandb
+
+# Option 2: MLflow
+# mlflow
+
+# Option 3: TensorBoard (PyTorch/TensorFlow 내장)
+# tensorboard
+
+
+# ===== 모델 평가 =====
+scikit-learn
+
+
+# ===== 설정 파일 =====
+pyyaml
+python-dotenv
+
+
+# ===== 추가 유틸리티 (선택) =====
+# seaborn  # 고급 시각화
+# plotly  # 인터랙티브 시각화
+
+
+# ==========================================
+# 업데이트 로그
+# ==========================================
+# 2025-12-05: 초기 예시 버전 생성 (버전 명시 제거 - 최신 버전 설치)
+# YYYY-MM-DD: [팀원 이름] 변경 사항 기록

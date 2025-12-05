@@ -12,7 +12,7 @@
 
 ## 역할 정의
 
-### 1. Leader (이진석)
+### 1. Leader ([이진석])
 
 **핵심 책임**:
 - 프로젝트 조율 및 의사결정 촉진
@@ -29,7 +29,7 @@
 
 ---
 
-### 2. Data Engineer ([이름])
+### 2. Data Engineer ([김민우], [김나연])
 
 **핵심 책임**:
 - EDA (탐색적 데이터 분석) 주도
@@ -46,7 +46,7 @@
 
 ---
 
-### 3. Model Architect ([이름])
+### 3. Model Architect ([김보윤])
 
 **핵심 책임**:
 - Object Detection 모델 리서치 및 선정
@@ -63,24 +63,28 @@
 
 ---
 
-### 4. Experimentation Lead ([이름])
+### 4. Experimentation Lead ([황유민])
 
 **핵심 책임**:
 - 실험 추적 시스템 구축 (W&B/MLflow)
-- 하이퍼파라미터 튜닝
-- A/B 실험 설계 및 실행
-- 성능 평가 및 비교 분석
+- 하이퍼석])
+
+**핵심 책임**:
+- Pull Request 리뷰
+- 코드 통합 및 충돌 해결
+- 추론 파이프라인 구축
+- Kaggle 제출 파일 생성 및 제출
 
 **주요 산출물**:
-- `configs/*.yaml` (설정 파일)
-- `logs/experiments/` (실험 로그)
-- 성능 분석 그래프 및 리포트
+- `scripts/inference.py`
+- `scripts/make_submission.py`
+- 코드 리뷰 피드백
 
-**작업 비중**: 시스템 구축 30% | 실험 50% | 분석 20%
+**작업 비중**: 리뷰 40% | 통합 40% | 제출 20%
 
 ---
 
-### 5. Integration Specialist ([이름])
+### 5. Integration Specialist ([이진석])
 
 **핵심 책임**:
 - Pull Request 리뷰
@@ -151,10 +155,10 @@
 | 역할 | 이름 | 강점 | 관심사 | GitHub |
 |:----:|:-----|:-----|:-------|:-------|
 | Leader | 이진석 | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @Jin94-ai |
-| Data Engineer | [이름] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @username |
-| Model Architect | [이름] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @username |
-| Experimentation Lead | [이름] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @username |
-| Integration Specialist | [이름] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @username |
+| Data Engineer | [김민우. 김나연] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @perweekdev @kny981229 |
+| Model Architect | [김보윤] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @bykim0119 |
+| Experimentation Lead | [황유민] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @Yumin-Hwang046|
+| Integration Specialist | [이진석] | [첫 미팅 후 작성] | [첫 미팅 후 작성] | @Jin94-ai |
 
 ---
 
