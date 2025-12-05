@@ -29,7 +29,7 @@
 2. 제출 파일 생성 (`scripts/make_submission.py`)
 3. Kaggle에 제출
 4. 이 파일 업데이트 (위 테이블에 추가)
-5. Discord/Slack에 결과 공유
+5. 팀원들에게(Discord 등) 결과 공유
 
 ### 3. 제출 전략
 - **하루 최대 제출**: 2회 권장
