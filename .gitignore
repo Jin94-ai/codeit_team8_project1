@@ -60,6 +60,7 @@ wandb/
 # Logs
 logs/**/*
 !logs/**/README.md
+!logs/kaggle_submissions.md
 *.log
 
 # Environment variables
