@@ -27,6 +27,7 @@ $PY -m src.data.yolo_dataset.yolo_export
 $PY -m src.models.$(basename $MODEL_FILE .py)
 EOF
 
+
 chmod +x "$SCRIPT_DIR/run.sh"
 
 # 기존 alias 제거
