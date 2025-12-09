@@ -8,7 +8,7 @@ BASE_DIR = PROJECT_ROOT / "data"
 TRAIN_IMG_DIR = str(BASE_DIR / "train_images")
 TRAIN_ANN_DIR = str(BASE_DIR / "train_annotations")
 
-YOLO_ROOT = str(PROJECT_ROOT / "datasets" / "pills")
+YOLO_ROOT = str(BASE_DIR / "yolo")
 
 VAL_RATIO = 0.2
 SPLIT_SEED = 42

@@ -4,8 +4,8 @@ from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from config import TRAIN_IMG_DIR, YOLO_ROOT, VAL_RATIO, SPLIT_SEED
-from coco_parser import load_coco_tables_with_consistency
+from .config import TRAIN_IMG_DIR, YOLO_ROOT, VAL_RATIO, SPLIT_SEED
+from .coco_parser import load_coco_tables_with_consistency
 
 
 def build_image_level_df(images_df: pd.DataFrame, annotations_df: pd.DataFrame) -> pd.DataFrame:

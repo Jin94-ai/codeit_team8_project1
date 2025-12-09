@@ -37,22 +37,22 @@
     - `[split] Train 어노테이션 수: ..., Val 어노테이션 수: ...`  
     - `rep_category 1장짜리 클래스 수: ... (전부 train에 포함)`  
   - YOLO 디렉터리 생성 메시지  
-    - `YOLO 디렉터리 생성 완료: datasets/pills`  
+    - `YOLO 디렉터리 생성 완료: project_root/data/yolo`  
   - 클래스 수 및 data.yaml 생성  
     - `클래스 수: ...`  
-    - `data.yaml 생성 완료: datasets/pills/pills.yaml`  
+    - `data.yaml 생성 완료: project_root/data/yolo/pills.yaml`  
   - 이미지 복사 실패가 있으면 파일명과 함께 경고가 출력된다.  
 
 - 실행 후 결과 확인  
-  - `datasets/pills/` 아래 구조를 확인한다.  
-    - `datasets/pills/images/train/` : 학습용 이미지  
-    - `datasets/pills/images/val/`   : 검증용 이미지  
-    - `datasets/pills/labels/train/` : 각 이미지와 동일한 이름의 `.txt` 라벨  
-    - `datasets/pills/labels/val/`   : 검증용 라벨  
-    - `datasets/pills/pills.yaml`    : YOLOv8 학습용 설정 파일  
+  - `project_root/data/yolo/` 아래 구조를 확인한다.  
+    - `project_root/data/yolo/images/train/` : 학습용 이미지  
+    - `project_root/data/yolo/images/val/`   : 검증용 이미지  
+    - `project_root/data/yolo/labels/train/` : 각 이미지와 동일한 이름의 `.txt` 라벨  
+    - `project_root/data/yolo/labels/val/`   : 검증용 라벨  
+    - `project_root/data/yolo/pills.yaml`    : YOLOv8 학습용 설정 파일  
   - 각 이미지에 대해 같은 이름의 `.txt`가 생성되었는지, txt 내용이  
     - `class_id x_center y_center width height` (0~1 사이 실수) 형식인지 확인한다.  
 
 - YOLOv8에서 학습 시작 예시  
   - Ultralytics YOLOv8 환경이 준비되어 있다고 가정하면, 다음과 같이 학습을 시작할 수 있다.  
-    - `yolo detect train data=datasets/pills/pills.yaml model=yolov8n.pt imgsz=640 epochs=50`
+    - `yolo detect train data=project_root/data/yolo/pills.yaml model=yolov8n.pt imgsz=640 epochs=50`
