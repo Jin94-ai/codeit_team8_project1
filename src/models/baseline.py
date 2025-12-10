@@ -40,11 +40,44 @@ else:
 
 ################### Model Run ###################
 
+import wandb
 from ultralytics import YOLO
 
-model = YOLO("yolov8n.pt")   
-model.train(
-    data="data/yolo/pills.yaml",
-    epochs=50,
-    imgsz=640,
-)
+def main():
+    # 1) W&B run 시작 + config 자동 로깅
+    wandb.init(
+        project="project1",
+        config={
+            "model": "yolov8n.pt",
+            "data": "data/yolo/pills.yaml",
+            "epochs": 50,
+            "imgsz": 640,
+            "lr0": 0.001,
+            "batch": 16
+        }
+    )
+
+    cfg = wandb.config  # wandb가 저장한 config
+
+    # 2) YOLO 모델 불러오기
+    model = YOLO(cfg.model)
+
+    # 3) YOLO 학습
+    result = model.train(
+        data=cfg.data,
+        epochs=cfg.epochs,
+        imgsz=cfg.imgsz,
+        lr0=cfg.lr0,
+        batch=cfg.batch,
+        project="runs/train",
+        name="wandb_run",
+    )
+
+    # 4) 학습 결과를 W&B에 자동 업로드
+    wandb.log({"result": result})
+
+    wandb.finish()
+
+
+if __name__ == "__main__":
+    main()
