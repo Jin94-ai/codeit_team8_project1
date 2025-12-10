@@ -3,7 +3,7 @@ import glob
 import json
 import pandas as pd
 from typing import Tuple, List
-from config import TRAIN_ANN_DIR
+from .config import TRAIN_ANN_DIR
 
 def load_coco_tables() -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     """

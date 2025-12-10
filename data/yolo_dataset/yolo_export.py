@@ -6,8 +6,8 @@ from typing import Tuple
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from config import TRAIN_IMG_DIR, YOLO_ROOT, VAL_RATIO, SPLIT_SEED
-from coco_parser import load_coco_tables
+from .config import TRAIN_IMG_DIR, YOLO_ROOT, VAL_RATIO, SPLIT_SEED
+from .coco_parser import load_coco_tables
 
 
 def train_val_split(

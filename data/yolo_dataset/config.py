@@ -1,7 +1,12 @@
 import os
 
 # 기본 경로 설정
-BASE_DIR = "data"
+_current_file_path = os.path.abspath(__file__)
+_yolo_dataset_dir = os.path.dirname(_current_file_path) 
+_data_root_dir = os.path.dirname(_yolo_dataset_dir) 
+PROJECT_ROOT = os.path.dirname(_data_root_dir)
+
+BASE_DIR = _data_root_dir 
 
 TRAIN_IMG_DIR = os.path.join(BASE_DIR, "train_images")
 TEST_IMG_DIR = os.path.join(BASE_DIR, "test_images")
