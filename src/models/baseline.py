@@ -51,32 +51,28 @@ wandb.init(
         "model": "yolov8n.pt",
         "data": "data/yolo/pills.yaml",
         "epochs": 50,
-        "imgsz": 480,
+        "imgsz": 640,
         "conf": 0.5,
-        "iou": 0.6,
+        "iou": 0.5,
         "max_det": 100,
     }
 )
 
-# model = YOLO("yolov8n.pt")   # 모델 학습시 주석 해제
-# model.train(
-#     data="data/yolo/pills.yaml",
-#     epochs=50,
-#     imgsz=512,
-# )
-
-model = YOLO("runs/detect/train13/weights/best.pt")  # predict만(폴더경로 train부분 변경해야함)
+model = YOLO("yolov8n.pt")
+model.train(
+    data="data/yolo/pills.yaml",
+    epochs=50,
+    imgsz=640,
+)
 
 results = model.predict(
     source="data/test_images/",
-    imgsz=(512, 896),
-    conf=0.25,
-    iou=0.6,
+    imgsz=640,
+    conf=0.5,
+    iou=0.5,
     max_det=100,
-    device=0,
-    half=True,
-    verbose=False,
-    batch=4
+    agnostic_nms=True,
+    verbose=False
 )
 
 # YOLO index → 원본 category_id 매핑 로드
