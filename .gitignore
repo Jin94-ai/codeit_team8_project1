@@ -69,6 +69,12 @@ outputs/
 # Environment variables
 .env
 .env.local
+.env.aihub
+
+# AI Hub
+aihubshell
+data/aihub_downloads/
+data/added/*/annotations_fixed/
 
 # OS
 .DS_Store
@@ -82,3 +88,4 @@ LEADERSHIP_ADVICE.md
 CLAUDE.md
 SESSION_STATUS.md
 FILE_ORGANIZATION.md
+.claude/
