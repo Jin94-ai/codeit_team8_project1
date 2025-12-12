@@ -74,7 +74,10 @@ outputs/
 # AI Hub
 aihubshell
 data/aihub_downloads/
-data/added/*/annotations_fixed/
+data/aihub_integrated/
+data/added/
+166.약품식별_인공지능_개발을_위한_경구약제_이미지_데이터/
+download*.tar
 
 # OS
 .DS_Store
