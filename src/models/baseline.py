@@ -74,7 +74,7 @@ model.train(
     data="data/yolo/pills.yaml",
     epochs=50,
     half=True,
-    batch=32,
+    batch=16,
     imgsz=640,
     rect=True
 )
