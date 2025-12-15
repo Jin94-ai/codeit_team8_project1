@@ -9,6 +9,7 @@ import pandas as pd
 from PIL import Image
 from tqdm.notebook import tqdm
 import random
+import torch
 from src.models.callbacks import wandb_train_logging, wandb_val_logging
 
 import wandb
@@ -21,8 +22,8 @@ warnings.filterwarnings('ignore')
 # Matplotlib 폰트 매니저
 from matplotlib import font_manager
 
-# ---- 코랩 기본 한글 폰트 자동 설정 ----
-# 코랩에 기본적으로 설치된 폰트 후보들
+# ---- 한글 폰트 자동 설정 ----
+
 korean_fonts = ["NanumGothic", "AppleGothic", "Malgun Gothic", "DejaVu Sans"]
 
 # 사용 가능한 폰트를 자동으로 탐색
@@ -37,9 +38,31 @@ for font in korean_fonts:
 if selected_font:
     plt.rcParams['font.family'] = selected_font
     plt.rcParams['axes.unicode_minus'] = False
-    print(f"코랩에서 사용 가능한 한글 폰트 설정 완료: {selected_font}")
+    print(f"한글 폰트 설정 완료: {selected_font}")
 else:
-    print("경고: 사용 가능한 기본 한글 폰트를 찾지 못했습니다. 수동 설정 필요")
+    print("경고: 사용 가능한 기본 한글 폰트를 찾지 못했습니다.")
+    
+    
+    
+
+# =================== Seed Fix ===================
+
+
+def seed_fix(seed: int = 42):
+    random.seed(seed)
+    np.random.seed(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+
+seed_fix(42)
+# ==============================================
+
 
 
 
