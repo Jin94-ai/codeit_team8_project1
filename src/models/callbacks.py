@@ -2,6 +2,7 @@ import wandb
 import torch
 import glob
 import os
+import numpy as np
 from PIL import Image   # resize 위해 추가
 
 _last_train_log = {}
@@ -44,6 +45,21 @@ def wandb_val_logging(validator):
                 log_dict[f"val/{k}"] = float(v)
             except:
                 pass
+
+        # --------------------------
+        # mAP@0.75:0.95 계산 (캐글 평가 기준)
+        # IoU thresholds: [0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95]
+        # index 5~9가 0.75~0.95에 해당
+        # --------------------------
+        try:
+            if hasattr(metrics, 'box') and hasattr(metrics.box, 'ap'):
+                ap = metrics.box.ap  # shape: (num_classes, 10)
+                if ap is not None and len(ap) > 0:
+                    # IoU 0.75~0.95 (index 5~9)
+                    ap_75_95 = ap[:, 5:].mean()
+                    log_dict["val/mAP75-95"] = float(ap_75_95)
+        except Exception as e:
+            pass
 
     # ============================================================
     # 이미지 업로드 (이미지 파일만 필터링 + resize 적용)
