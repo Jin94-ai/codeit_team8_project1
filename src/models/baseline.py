@@ -43,6 +43,7 @@ else:
 
 import wandb
 from ultralytics import YOLO
+from src.models.callbacks import wandb_train_logging, wandb_val_logging
 
 # W&B 초기화
 wandb.init(
@@ -59,6 +60,8 @@ wandb.init(
 )
 
 model = YOLO("yolov8n.pt")
+model.add_callback("on_fit_epoch_end", wandb_train_logging)
+model.add_callback("on_val_end", wandb_val_logging)
 model.train(
     data="data/yolo/pills.yaml",
     epochs=50,
