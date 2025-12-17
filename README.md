@@ -113,9 +113,10 @@ pip install -r requirements.txt
 
 ## 실험 결과
 
-| ID | 모델 | mAP@50 | Kaggle Score | 날짜 | 담당 | 상태 |
-|:--:|:-----|:------:|:------------:|:----:|:-----|:----:|
-| - | - | - | - | - | - | - |
+|       ID       | 모델      | mAP@50 | Kaggle Score |     날짜     | 담당  |  상태 |
+| :------------: | :------ | :----: | :----------: | :--------: | :-- | :-: |
+| Experiment 001 | YOLOv8n |  0.915 |     0.00     | 2025-12-09 | 김보윤 |  완료 |
+
 
 > 실험 상세: [logs/experiments/](logs/experiments/)
 
@@ -186,8 +187,7 @@ codeit_team8_project1/
 - **협업 일지**: [logs/collaboration/](logs/collaboration/)
 - **회의록**: [logs/meetings/](logs/meetings/)
 - **실험 로그**: [logs/experiments/](logs/experiments/)
-
----
+- **실험 추적 도구 WandB Workspace**: [https://wandb.ai/codeit_team8/codeit_team8]
 
 ## 협업 규칙
 
