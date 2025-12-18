@@ -54,6 +54,8 @@ data/processed/
 *.pt
 !yolo11s.pt
 !yolo11s-cls.pt
+!best_classifier.pt
+!best_detector.pt
 *.onnx
 *.pb
 models/checkpoints/
