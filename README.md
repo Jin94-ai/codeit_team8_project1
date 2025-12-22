@@ -8,7 +8,7 @@
 
 **2-Stage Pipeline 기반 알약 검출 및 분류 시스템**
 
-**기간**: 2024.12.05 ~ 12.23 | **평가**: Kaggle Private Competition (mAP@[0.75:0.95])
+**기간**: 2025.12.04 ~ 12.23 | **평가**: Kaggle Private Competition (mAP@[0.75:0.95])
 
 </div>
 
@@ -19,8 +19,8 @@
 | Metric | Score |
 |--------|-------|
 | **Kaggle Score** | **0.96703** |
-| Baseline | 0.815 |
-| 개선율 | +18.7% |
+| Baseline | 0.82 |
+| 개선율 | +18% |
 
 ---
 
@@ -137,16 +137,55 @@ codeit_team8_project1/
 
 ---
 
+## Best Model 설정
+
+### Stage 1: YOLO11m Detector
+
+| 설정 | 값 |
+|------|-----|
+| 모델 | yolo11m.pt |
+| imgsz | 640 |
+| epochs | 50 |
+| batch | 8 |
+| patience | 15 |
+| 추론 conf | 0.05 |
+
+**성능**: mAP50 0.995, mAP50-95 0.85, Precision/Recall 0.99
+
+### Stage 2: ConvNeXt Classifier
+
+| 설정 | 값 |
+|------|-----|
+| 모델 | convnext_tiny (ImageNet pretrained) |
+| img_size | 224 |
+| epochs | 50 |
+| lr | 1e-4 |
+| 추론 conf | 0.3 |
+
+**성능**: Val Accuracy 98.5%, Early Stop Epoch 21
+
+### 데이터 정제 기준 (핵심 성공 요인)
+
+```python
+BBOX_COUNT_RANGE = (3, 4)  # Kaggle 테스트와 동일
+IOU_THRESHOLD = 0.7        # 중복 제거
+MIN_BBOX_SIZE = 50         # 너무 작은 bbox 제외
+MAX_BBOX_SIZE = 500        # 너무 큰 bbox 제외
+```
+
+---
+
 ## 실험 기록
 
-| Submission | Score | 설명 |
-|------------|-------|------|
-| #1 | 0.815 | Baseline (YOLO 단일 모델) |
-| #2 | 0.690 | End-to-End 196 클래스 |
-| #3 | 0.920 | 2-Stage (YOLO + YOLO-cls) |
-| #4 | 0.963 | 2-Stage (YOLO + ConvNeXt) |
-| #5 | 0.965 | AIHub 데이터 추가 |
-| **#6** | **0.967** | **데이터 정제 + 최적화** |
+| # | Score | 설명 | 변화 |
+|---|-------|------|------|
+| 1 | 0.82 | Baseline (YOLO12m End-to-end) | - |
+| - | 0.6 | 복합경구제 (bbox 1개 문제) | -0.22 |
+| 2 | 0.822 | 단일경구제 추가 | +0.002 |
+| 3 | **0.920** | **2-Stage (YOLO + YOLO-cls)** | **+0.098** |
+| 4 | **0.963** | **데이터셋/Detector 개선** | **+0.043** |
+| 5 | 0.965 | AIHub 데이터 추가 | +0.002 |
+| **6** | **0.96703** | **데이터 정제 + ConvNeXt** | **+0.002** |
 
 ---
 

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Eat - AI 알약 인식 | 전문가 발표</title>
+
+    <!-- Reveal.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-blue: #0066FF;
+            --secondary-blue: #00A3FF;
+            --accent-blue: #00D4FF;
+            --dark-bg: #0a0a0f;
+            --dark-card: #12121a;
+            --dark-border: #1e1e2e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --gradient-blue: linear-gradient(135deg, #0066FF 0%, #00D4FF 100%);
+            --gradient-dark: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%);
+        }
+
+        .reveal {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--dark-bg);
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal h1, .reveal h2, .reveal h3 {
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: -0.02em;
+        }
+
+        .reveal h1 {
+            font-size: 2.2em;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .reveal h2 {
+            font-size: 1.5em;
+            color: var(--text-primary);
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .reveal h3 {
+            font-size: 1.1em;
+            color: var(--secondary-blue);
+        }
+
+        .reveal p, .reveal li {
+            font-size: 0.75em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Title Slide */
+        .title-slide {
+            text-align: center !important;
+        }
+
+        .title-slide h1 {
+            font-size: 2.8em;
+            margin-bottom: 8px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.2em;
+            color: var(--accent-blue);
+            margin-bottom: 25px;
+        }
+
+        .title-slide .team-info {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        .title-slide .score-badge {
+            display: inline-block;
+            background: var(--gradient-blue);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: white;
+            margin-top: 20px;
+            box-shadow: 0 0 40px rgba(0, 102, 255, 0.4);
+        }
+
+        /* Metric Cards */
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .metric-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .metric-card .value {
+            font-size: 1.6em;
+            font-weight: 700;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .metric-card .label {
+            font-size: 0.7em;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Architecture Diagram */
+        .architecture-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .arch-box {
+            background: var(--dark-card);
+            border: 2px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 18px;
+            min-width: 220px;
+            transition: all 0.3s ease;
+        }
+
+        .arch-box.stage1 {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .arch-box.stage2 {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .arch-box h3 {
+            margin: 0 0 10px 0;
+            font-size: 0.95em;
+        }
+
+        .arch-box .detail {
+            font-size: 0.7em;
+            color: var(--text-secondary);
+            margin: 3px 0;
+        }
+
+        .arch-arrow {
+            font-size: 1.5em;
+            color: var(--primary-blue);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 25px;
+            margin-top: 15px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-blue);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 12px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 4px;
+            width: 8px;
+            height: 8px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary-blue);
+        }
+
+        .timeline-item .date {
+            font-size: 0.65em;
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .timeline-item .title {
+            font-size: 0.8em;
+            color: var(--text-primary);
+            margin: 3px 0;
+        }
+
+        .timeline-item .score {
+            font-size: 0.95em;
+            font-weight: 700;
+            color: var(--secondary-blue);
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .data-table th {
+            background: var(--dark-card);
+            color: var(--accent-blue);
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.7em;
+            border-bottom: 2px solid var(--primary-blue);
+        }
+
+        .data-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--dark-border);
+            color: var(--text-secondary);
+            font-size: 0.7em;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(0, 102, 255, 0.1);
+        }
+
+        .data-table .highlight {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 10px;
+            padding: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6em;
+            color: var(--text-secondary);
+            overflow-x: auto;
+        }
+
+        .code-block .keyword {
+            color: var(--primary-blue);
+        }
+
+        .code-block .string {
+            color: #98c379;
+        }
+
+        .code-block .number {
+            color: var(--accent-blue);
+        }
+
+        .code-block .comment {
+            color: #5c6370;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .chart-container canvas {
+            max-height: 220px;
+        }
+
+        /* Two Column Layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .feature-card .icon {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+
+        .feature-card h3 {
+            font-size: 0.85em;
+            margin: 0 0 6px 0;
+        }
+
+        .feature-card p {
+            font-size: 0.65em;
+            margin: 0;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            background: var(--dark-card);
+            border-radius: 8px;
+            height: 14px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+
+        .progress-bar .fill {
+            height: 100%;
+            background: var(--gradient-blue);
+            border-radius: 8px;
+            transition: width 1s ease;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.6em;
+            font-weight: 500;
+        }
+
+        .badge.success {
+            background: rgba(0, 212, 100, 0.2);
+            color: #00d464;
+        }
+
+        .badge.fail {
+            background: rgba(255, 82, 82, 0.2);
+            color: #ff5252;
+        }
+
+        .badge.info {
+            background: rgba(0, 163, 255, 0.2);
+            color: var(--secondary-blue);
+        }
+
+        /* Team Cards */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .team-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .team-card .name {
+            font-size: 0.85em;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .team-card .role {
+            font-size: 0.6em;
+            color: var(--accent-blue);
+            margin-bottom: 6px;
+        }
+
+        .team-card .contribution {
+            font-size: 0.55em;
+            color: var(--text-secondary);
+        }
+
+        /* Conclusion Slide */
+        .conclusion-slide {
+            text-align: center !important;
+        }
+
+        .big-number {
+            font-size: 4.5em;
+            font-weight: 900;
+            background: var(--gradient-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .improvement {
+            font-size: 1.2em;
+            color: #00d464;
+            margin-top: 8px;
+        }
+
+        /* Image styling */
+        .slide-image {
+            max-width: 100%;
+            max-height: 280px;
+            border-radius: 10px;
+            border: 1px solid var(--dark-border);
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Animations */
+        .fragment.fade-up {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        .fragment.fade-up.visible {
+            transform: translateY(0);
+            opacity: 1;
+            transition: all 0.5s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .metric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- 슬라이드 1: 표지 -->
+            <section class="title-slide">
+                <h1>Health Eat</h1>
+                <p class="subtitle">AI 기반 알약 인식 시스템</p>
+                <p class="team-info">코드잇 8팀 | 2025.12.04 - 12.23</p>
+                <div class="score-badge">
+                    Kaggle Score 0.96703
+                </div>
+            </section>
+
+            <!-- 슬라이드 2: 핵심 요약 -->
+            <section>
+                <h2>핵심 요약</h2>
+                <div class="metric-grid">
+                    <div class="metric-card fragment fade-up">
+                        <div class="value">0.96703</div>
+                        <div class="label">최종 점수</div>
+                    </div>
+                    <div class="metric-card fragment fade-up">
+                        <div class="value">+18.7%</div>
+                        <div class="label">성능 향상</div>
+                    </div>
+                    <div class="metric-card fragment fade-up">
+                        <div class="value">74</div>
+                        <div class="label">타겟 클래스</div>
+                    </div>
+                    <div class="metric-card fragment fade-up">
+                        <div class="value">3주</div>
+                        <div class="label">개발 기간</div>
+                    </div>
+                </div>
+                <div class="image-container fragment fade-up" style="margin-top: 15px;">
+                    <img src="../images/07_score_timeline.png" alt="Score Timeline" class="slide-image" style="max-height: 250px;">
+                </div>
+            </section>
+
+            <!-- 슬라이드 3: 문제 정의 -->
+            <section>
+                <h2>문제 정의</h2>
+                <div class="two-col">
+                    <div>
+                        <h3>Kaggle 대회: 알약 검출 및 분류</h3>
+                        <table class="data-table">
+                            <tr><td>평가 지표</td><td class="highlight">mAP@[0.75:0.95]</td></tr>
+                            <tr><td>타겟 클래스</td><td class="highlight">74개</td></tr>
+                            <tr><td>Train 이미지</td><td class="highlight">232개</td></tr>
+                            <tr><td>Test 이미지</td><td class="highlight">843개</td></tr>
+                            <tr><td>클래스 불균형</td><td class="highlight">1:80</td></tr>
+                        </table>
+                    </div>
+                    <div class="image-container">
+                        <img src="../images/03_class_distribution.png" alt="Class Distribution" class="slide-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 슬라이드 4: 2-Stage 아키텍처 -->
+            <section>
+                <h2>2-Stage 파이프라인 아키텍처</h2>
+                <p style="color: var(--accent-blue); margin-bottom: 30px;">Detection과 Classification을 분리하여 각각 최적화</p>
+
+                <div class="architecture-flow">
+                    <div class="arch-box stage1">
+                        <h3 style="color: var(--primary-blue);">Stage 1: 검출기</h3>
+                        <div class="detail"><strong>모델:</strong> YOLO11m</div>
+                        <div class="detail"><strong>태스크:</strong> 단일 클래스 검출</div>
+                        <div class="detail"><strong>출력:</strong> Bounding Boxes</div>
+                        <div class="detail" style="margin-top: 15px;">
+                            <span class="badge success">mAP50: 0.995</span>
+                        </div>
+                    </div>
+
+                    <div class="arch-arrow">→</div>
+
+                    <div class="arch-box stage2">
+                        <h3 style="color: var(--accent-blue);">Stage 2: 분류기</h3>
+                        <div class="detail"><strong>모델:</strong> ConvNeXt-Tiny</div>
+                        <div class="detail"><strong>태스크:</strong> 74개 클래스 분류</div>
+                        <div class="detail"><strong>출력:</strong> K-code + Confidence</div>
+                        <div class="detail" style="margin-top: 15px;">
+                            <span class="badge success">정확도: 98.5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-container fragment fade-up" style="margin-top: 20px;">
+                    <img src="../images/08_2stage_architecture.png" alt="2-Stage Architecture" class="slide-image" style="max-height: 200px;">
+                </div>
+            </section>
+
+            <!-- 슬라이드 5: 검출기 상세 -->
+            <section>
+                <h2>Stage 1: YOLO11m 검출기</h2>
+                <div class="two-col">
+                    <div>
+                        <h3>학습 설정</h3>
+                        <table class="data-table">
+                            <tr><td>모델</td><td class="highlight">yolo11m.pt</td></tr>
+                            <tr><td>이미지 크기</td><td class="highlight">640</td></tr>
+                            <tr><td>배치 크기</td><td class="highlight">8</td></tr>
+                            <tr><td>에폭</td><td class="highlight">50 (patience=15)</td></tr>
+                        </table>
+                        <h3 style="margin-top: 12px;">성능 지표</h3>
+                        <table class="data-table">
+                            <tr><td>mAP50</td><td class="highlight">0.995</td></tr>
+                            <tr><td>mAP50-95</td><td class="highlight">0.85</td></tr>
+                            <tr><td>정밀도/재현율</td><td class="highlight">0.99 / 0.99</td></tr>
+                        </table>
+                    </div>
+                    <div class="image-container">
+                        <img src="../images/16_detector_results.png" alt="Detector Results" class="slide-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 슬라이드 6: 데이터 정제 -->
+            <section>
+                <h2>데이터 정제 전략</h2>
+                <p style="color: var(--accent-blue); font-size: 0.7em;">핵심 성공 요인: 테스트 환경과 유사한 고품질 데이터만 선별</p>
+
+                <div class="two-col" style="margin-top: 15px;">
+                    <div>
+                        <h3>필터링 기준</h3>
+                        <table class="data-table">
+                            <tr><td>bbox 개수</td><td class="highlight">3~4개 (테스트와 동일)</td></tr>
+                            <tr><td>IoU 임계값</td><td class="highlight">0.7 (중복 제거)</td></tr>
+                            <tr><td>bbox 크기</td><td class="highlight">50~500px</td></tr>
+                        </table>
+                        <h3 style="margin-top: 12px;">정제 결과</h3>
+                        <table class="data-table">
+                            <tr><th>항목</th><th>정제 전</th><th>정제 후</th></tr>
+                            <tr><td>이미지 수</td><td>~10,000</td><td class="highlight">~7,000</td></tr>
+                            <tr><td>bbox/이미지</td><td>1~10개</td><td class="highlight">3~4개</td></tr>
+                        </table>
+                    </div>
+                    <div class="image-container">
+                        <img src="../images/14_data_refinement.png" alt="Data Refinement" class="slide-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 슬라이드 7: 실험 여정 -->
+            <section>
+                <h2>실험 여정</h2>
+                <div class="two-col">
+                    <div class="timeline">
+                        <div class="timeline-item fragment fade-up">
+                            <div class="date">Phase 1</div>
+                            <div class="title">베이스라인 (End-to-end YOLO)</div>
+                            <div class="score">0.82</div>
+                        </div>
+                        <div class="timeline-item fragment fade-up">
+                            <div class="date">Phase 2 <span class="badge fail">실패</span></div>
+                            <div class="title">AIHub 복합경구제 시도</div>
+                            <div class="score" style="color: #ff5252;">0.6</div>
+                        </div>
+                        <div class="timeline-item fragment fade-up">
+                            <div class="date">Phase 3</div>
+                            <div class="title">단일경구제 추가</div>
+                            <div class="score">0.822</div>
+                        </div>
+                        <div class="timeline-item fragment fade-up">
+                            <div class="date">Phase 4 [핵심]</div>
+                            <div class="title">2-Stage 파이프라인 도입</div>
+                            <div class="score">0.920</div>
+                        </div>
+                        <div class="timeline-item fragment fade-up">
+                            <div class="date">Phase 5</div>
+                            <div class="title">데이터셋 개선</div>
+                            <div class="score">0.963</div>
+                        </div>
+                        <div class="timeline-item fragment fade-up">
+                            <div class="date">Phase 6 [BEST]</div>
+                            <div class="title">데이터 정제</div>
+                            <div class="score" style="font-size: 1.2em;">0.96703</div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>핵심 인사이트</h3>
+                        <div class="feature-card" style="margin-bottom: 15px;">
+                            <h3 style="color: var(--accent-blue);">2-Stage가 핵심</h3>
+                            <p>End-to-end의 한계를 인식하고 Detection/Classification 분리</p>
+                        </div>
+                        <div class="feature-card" style="margin-bottom: 15px;">
+                            <h3 style="color: var(--accent-blue);">데이터 품질 > 양</h3>
+                            <p>10,000개 → 7,000개로 줄여도 성능 향상</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3 style="color: var(--accent-blue);">빠른 실험 사이클</h3>
+                            <p>실패 → 분석 → 방향 전환의 반복</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 슬라이드 8: 실패 사례 -->
+            <section>
+                <h2>실패 사례와 교훈</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>실험</th>
+                            <th>결과</th>
+                            <th>원인</th>
+                            <th>교훈</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fragment fade-up">
+                            <td>AIHub 복합경구제</td>
+                            <td><span class="badge fail">0.6</span></td>
+                            <td>이미지당 bbox 1개만 추출</td>
+                            <td>데이터 구조 이해 필수</td>
+                        </tr>
+                        <tr class="fragment fade-up">
+                            <td>imgsz 1280</td>
+                            <td><span class="badge fail">0.713</span></td>
+                            <td>학습/추론 설정 불일치</td>
+                            <td>일관된 설정 유지</td>
+                        </tr>
+                        <tr class="fragment fade-up">
+                            <td>TTA 적용</td>
+                            <td><span class="badge fail">0.533</span></td>
+                            <td>bbox 정밀도 저하</td>
+                            <td>mAP@[0.75:0.95]에서 역효과</td>
+                        </tr>
+                        <tr class="fragment fade-up">
+                            <td>End-to-end 74 클래스</td>
+                            <td><span class="badge fail">~0.6</span></td>
+                            <td>클래스 불균형, 데이터 부족</td>
+                            <td>태스크 분리 필요</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="image-container fragment fade-up" style="margin-top: 20px;">
+                    <img src="../images/10_failure_timeline.png" alt="Failure Timeline" class="slide-image" style="max-height: 180px;">
+                </div>
+            </section>
+
+            <!-- 슬라이드 9: 베스트 모델 설정 -->
+            <section>
+                <h2>베스트 모델 설정</h2>
+                <p style="color: var(--accent-blue);">Score: 0.96703 달성 설정</p>
+
+                <div class="two-col" style="margin-top: 15px;">
+                    <div class="feature-card">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 12px;">Stage 1: YOLO11m 검출기</h3>
+                        <table class="data-table">
+                            <tr><td>모델</td><td class="highlight">yolo11m.pt</td></tr>
+                            <tr><td>이미지 크기</td><td class="highlight">640</td></tr>
+                            <tr><td>배치 크기</td><td class="highlight">8</td></tr>
+                            <tr><td>에폭</td><td class="highlight">50</td></tr>
+                            <tr><td>추론 신뢰도</td><td class="highlight">0.05</td></tr>
+                        </table>
+                    </div>
+                    <div class="feature-card">
+                        <h3 style="color: var(--accent-blue); margin-bottom: 12px;">Stage 2: ConvNeXt 분류기</h3>
+                        <table class="data-table">
+                            <tr><td>모델</td><td class="highlight">convnext_tiny</td></tr>
+                            <tr><td>사전학습</td><td class="highlight">ImageNet</td></tr>
+                            <tr><td>이미지 크기</td><td class="highlight">224</td></tr>
+                            <tr><td>학습률</td><td class="highlight">1e-4</td></tr>
+                            <tr><td>검증 정확도</td><td class="highlight">98.5%</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="code-block fragment fade-up" style="margin-top: 30px;">
+<span class="comment"># 재현 명령어</span>
+python src/data/aihub/extract_for_detector.py      <span class="comment"># 데이터 추출</span>
+python src/data/cleanup_detector_data.py --delete  <span class="comment"># 데이터 정제</span>
+python src/models/yolo11m_detector.py              <span class="comment"># 검출기 학습</span>
+python src/models/convnext_classifier.py           <span class="comment"># 분류기 학습</span>
+python -m src.inference.submit_v2 --det_conf <span class="number">0.05</span> --cls_conf <span class="number">0.3</span>
+                </div>
+            </section>
+
+            <!-- 슬라이드 10: 팀 기여 -->
+            <section>
+                <h2>팀 기여</h2>
+                <div class="two-col">
+                    <div class="team-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="team-card">
+                            <div class="name">이진석</div>
+                            <div class="role">리더</div>
+                            <div class="contribution">2-Stage 파이프라인<br>데이터셋 정제</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="name">김민우</div>
+                            <div class="role">데이터 엔지니어</div>
+                            <div class="contribution">EDA 분석<br>B2C/B2B 분석</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="name">김나연</div>
+                            <div class="role">데이터 엔지니어</div>
+                            <div class="contribution">색상 증강 실험<br>시장 조사</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="name">김보윤</div>
+                            <div class="role">ML 엔지니어</div>
+                            <div class="contribution">자동화 파이프라인<br>Cloud 아키텍처</div>
+                        </div>
+                        <div class="team-card">
+                            <div class="name">황유민</div>
+                            <div class="role">실험 리드</div>
+                            <div class="contribution">W&B 시스템<br>증강 전략</div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <img src="../images/09_collaboration_stats.png" alt="Collaboration Stats" class="slide-image">
+                    </div>
+                </div>
+            </section>
+
+            <!-- 슬라이드 11: 결론 -->
+            <section class="conclusion-slide">
+                <h2 style="border: none; text-align: center;">최종 결과</h2>
+                <div class="big-number fragment fade-up">0.96703</div>
+                <div class="improvement fragment fade-up">베이스라인 대비 +18.7%</div>
+
+                <div class="three-col fragment fade-up" style="margin-top: 30px; text-align: left;">
+                    <div class="feature-card">
+                        <h3>핵심 성공 요인</h3>
+                        <p>2-Stage 파이프라인으로 Detection/Classification 독립 최적화</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>핵심 인사이트</h3>
+                        <p>데이터 품질이 양보다 중요. 테스트 환경에 맞는 정제가 핵심</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>배운 점</h3>
+                        <p>빠른 실험 사이클과 실패 분석이 성공의 열쇠</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 슬라이드 12: Q&A -->
+            <section class="title-slide">
+                <h1>감사합니다</h1>
+                <p class="subtitle">질문 및 토론</p>
+                <p class="team-info" style="margin-top: 40px;">
+                    github.com/Jin94-ai/codeit_team8_project1
+                </p>
+                <div style="margin-top: 60px; color: var(--text-secondary); font-size: 0.8em;">
+                    <span style="color: var(--accent-blue);">ESC</span> 전체 보기 |
+                    <span style="color: var(--accent-blue);">방향키</span> 이동
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+
+    <script>
+        // Initialize Reveal.js
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            showNotes: false,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            backgroundTransition: 'fade',
+            center: false,
+            width: 1280,
+            height: 720,
+            margin: 0.08,
+        });
+    </script>
+</body>
+</html>
