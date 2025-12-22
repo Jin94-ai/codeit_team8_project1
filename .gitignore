@@ -52,10 +52,6 @@ data/processed/
 # Model files
 *.pth
 *.pt
-!yolo11s.pt
-!yolo11s-cls.pt
-!best_classifier.pt
-!best_detector.pt
 notebooks/*.pt
 *.onnx
 *.pb
